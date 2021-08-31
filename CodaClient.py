@@ -301,6 +301,28 @@ class Client():
     res = self._send_query(query)
     return res['data']
 
+  def klget_daemon_status(self) -> dict:
+    """Gets the status of the currently configured Coda Daemon.
+    
+    Returns:
+         dict -- Returns the "data" field of the JSON Response as a Dict.
+    """
+    query = '''
+    query {
+      daemonStatus {
+        blockchainLength
+        highestBlockLengthReceived
+        uptimeSecs
+        peers
+        syncStatus
+        consensusTimeBestTip
+        consensusTimeNow
+      }
+    }
+    '''
+    res = self._send_query(query)
+    return res['data']
+
   def get_daemon_version(self) -> dict:
     """Gets the version of the currently configured Coda Daemon.
     
